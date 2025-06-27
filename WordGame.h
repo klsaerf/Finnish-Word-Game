@@ -10,6 +10,9 @@
 
 using namespace std;
 
+// The pairing of answer indexes to integer indexes
+const vector<pair<char, int>> ANSWER_INDEX = {{'A', 0}, {'B', 1}, {'C', 2}, {'D', 3}};
+
 class WordGame {
 public:
     WordGame();
@@ -23,11 +26,6 @@ private:
     // the correspondig word files and
     // puts them into the vector containers
     void retrieveWords_();
-
-    // Int function that returns a random
-    // index from 0 to the finnish_words_
-    // vector's size
-    int randomIndex_() const;
 
     // Word containers as vectors
     vector<string> finnish_words_;
