@@ -11,7 +11,7 @@
 using namespace std;
 
 // The pairing of answer indexes to integer indexes
-const vector<pair<char, int>> ANSWER_INDEX = {{'A', 0}, {'B', 1}, {'C', 2}, {'D', 3}};
+const vector<char> ANSWER_INDEX = {'A', 'B', 'C', 'D'};
 
 class WordGame {
 public:
@@ -20,7 +20,11 @@ public:
 
     // Void function that asks a question
     // This function will be improved later
-    void askQuestion() const;
+    void askQuestion();
+
+    // Void function that checks the inputed
+    // answer and prints the result accordingly
+    void checkAnswer(char answer) const;
 private:
     // Void function retrieving words from
     // the correspondig word files and
@@ -30,6 +34,13 @@ private:
     // Word containers as vectors
     vector<string> finnish_words_;
     vector<string> english_words_;
+
+    // Stores the current correct answer
+    // as a char-int pair, where:
+    // first  -> the answer char (a,b,c,d)
+    // second -> the answer's index in the
+    //           word container
+    pair<char, int> correct_answer_;
 };
 
 

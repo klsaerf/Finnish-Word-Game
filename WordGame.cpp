@@ -28,7 +28,7 @@ WordGame::WordGame() {
 
 WordGame::~WordGame() = default;
 
-void WordGame::askQuestion() const {
+void WordGame::askQuestion() {
     // The vector containing the indexes of the answers
     vector<int> choices;
 
@@ -56,27 +56,23 @@ void WordGame::askQuestion() const {
 
     // Printing the english answers
     for (int i = 0; i < 4; i++) {
-        cout << ANSWER_INDEX[i].first << ") " << english_words_[choices[i]] << endl;
-    }
-
-    // Get the answer from the player
-    cout << "Answer: ";
-    char line;
-    cin >> line;
-
-    // Retrieve the player's answer's index
-    int answer = -1;
-    for (const auto ans_pair: ANSWER_INDEX) {
-        if (ans_pair.first == toupper(line)) {
-            answer = ans_pair.second;
+        cout << ANSWER_INDEX[i] << ") " << english_words_[choices[i]] << endl;
+        if (choices[i] == correct_choice) {
+            correct_answer_.first = ANSWER_INDEX[i];
+            correct_answer_.second = choices[i];
         }
     }
 
+    // Answer prompt
+    cout << "Answer (a,b,c,d): ";
+}
+
+void WordGame::checkAnswer(char answer) const {
     // Check if the given answer is correct
-    if (choices[answer] == correct_choice) {
-        cout << "Correct! The answer was: " << english_words_[correct_choice]  << endl;
+    if (toupper(answer) == correct_answer_.first) {
+        cout << "Correct! The answer was: " << english_words_[correct_answer_.second]  << endl;
     } else {
-        cout << "Incorrect, the answer was: " << english_words_[correct_choice] << endl;
+        cout << "Incorrect, the answer was: " << english_words_[correct_answer_.second] << endl;
     }
 }
 

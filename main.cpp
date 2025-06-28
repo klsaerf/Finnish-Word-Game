@@ -12,6 +12,7 @@
  */
 
 #include "WordGame.h"
+#include <iostream>
 
 using namespace std;
 
@@ -19,7 +20,19 @@ int main()
 {
     WordGame game;
 
-    game.askQuestion();
+    // Main game loop
+    char input;
+    while (toupper(input) != 'Q') {
+        game.askQuestion();
+
+        char ans;
+        cin >> ans;
+        game.checkAnswer(ans);
+
+        cout << "Type (q) if you want to quit: ";
+        cin >> input;
+    }
+
 
     return 0;
 }
