@@ -22,7 +22,7 @@ void shuffleVector(vector<int>& v) {
     return shuffle(v.begin(), v.end(), gen);
 }
 
-WordGame::WordGame() {
+WordGame::WordGame(): current_streak_(0), highest_streak_(0) {
     retrieveWords_();
 }
 
@@ -64,16 +64,28 @@ void WordGame::askQuestion() {
     }
 
     // Answer prompt
-    cout << "Answer (a,b,c,d): ";
+    cout << "Answer (a,b,c,d, q to quit): ";
 }
 
-void WordGame::checkAnswer(char answer) const {
+void WordGame::checkAnswer(char answer) {
     // Check if the given answer is correct
     if (toupper(answer) == correct_answer_.first) {
         cout << "Correct! The answer was: " << english_words_[correct_answer_.second]  << endl;
+
+        // Increment current streak and print
+        current_streak_++;
+        cout << "Current correct answer streak is " << current_streak_ << "!" << endl;
     } else {
         cout << "Incorrect, the answer was: " << english_words_[correct_answer_.second] << endl;
+
+        // Lose current streak and print
+        cout << current_streak_ << " correct answer streak ended :(" << endl;
+        current_streak_ = 0;
     }
+
+    // Update the highest streak and print
+    if (current_streak_ > highest_streak_) highest_streak_ = current_streak_;
+    cout << "Highest streak so far: " << highest_streak_ << endl;
 }
 
 void WordGame::retrieveWords_() {

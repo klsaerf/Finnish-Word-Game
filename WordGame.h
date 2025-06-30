@@ -24,7 +24,7 @@ public:
 
     // Void function that checks the inputed
     // answer and prints the result accordingly
-    void checkAnswer(char answer) const;
+    void checkAnswer(char answer);
 private:
     // Void function retrieving words from
     // the correspondig word files and
@@ -41,6 +41,11 @@ private:
     // second -> the answer's index in the
     //           word container
     pair<char, int> correct_answer_;
+
+    // Int variables for recording correct
+    // answer streaks
+    int current_streak_;
+    int highest_streak_;
 };
 
 

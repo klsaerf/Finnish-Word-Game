@@ -21,16 +21,16 @@ int main()
     WordGame game;
 
     // Main game loop
-    char input;
-    while (toupper(input) != 'Q') {
+    while (true) {
         game.askQuestion();
 
         char ans;
         cin >> ans;
+
+        if (toupper(ans) == 'Q') break;
+
         game.checkAnswer(ans);
 
-        cout << "Type (q) if you want to quit: ";
-        cin >> input;
     }
 
 
