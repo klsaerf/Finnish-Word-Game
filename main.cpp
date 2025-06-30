@@ -20,6 +20,12 @@ int main()
 {
     WordGame game;
 
+    // Difficulty choosing dialogue
+    cout << "Choose a difficulty level (1 is easiest, 4 is hardest): ";
+    int difficulty;
+    cin >> difficulty;
+    while (!game.setDifficulty(difficulty)) cin >> difficulty;
+
     // Main game loop
     while (true) {
         game.askQuestion();

@@ -22,7 +22,7 @@ void shuffleVector(vector<int>& v) {
     return shuffle(v.begin(), v.end(), gen);
 }
 
-WordGame::WordGame(): current_streak_(0), highest_streak_(0) {
+WordGame::WordGame(): current_streak_(0), highest_streak_(0), difficulty_(4) {
     retrieveWords_();
 }
 
@@ -33,8 +33,7 @@ void WordGame::askQuestion() {
     vector<int> choices;
 
     // Populating the vector with the indexes
-    // 4 answers will be made a difficulty later
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < difficulty_; i++) {
         const int choice = randomNumber(0, static_cast<int>(finnish_words_.size()) - 1);
 
         // Ensure that answers are unique
@@ -55,7 +54,7 @@ void WordGame::askQuestion() {
     cout << "The word is: " << finnish_words_[correct_choice] << endl;
 
     // Printing the english answers
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < difficulty_; i++) {
         cout << ANSWER_INDEX[i] << ") " << english_words_[choices[i]] << endl;
         if (choices[i] == correct_choice) {
             correct_answer_.first = ANSWER_INDEX[i];
@@ -86,6 +85,16 @@ void WordGame::checkAnswer(char answer) {
     // Update the highest streak and print
     if (current_streak_ > highest_streak_) highest_streak_ = current_streak_;
     cout << "Highest streak so far: " << highest_streak_ << endl;
+}
+
+bool WordGame::setDifficulty(const int difficulty) {
+    // Only set difficulty if [1, 4] range
+    if ((difficulty > 4) or (difficulty < 1)) {
+        cout << "Please select a difficulty between 1 and 4: ";
+        return false;
+    }
+    difficulty_ = difficulty;
+    return true;
 }
 
 void WordGame::retrieveWords_() {
